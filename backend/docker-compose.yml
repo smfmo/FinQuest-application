@@ -1,0 +1,25 @@
+services:
+  database:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: adminFQ
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: finquest
+    ports:
+      - "5433:5432"
+    networks:
+      - finquest-compose-network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: adminFQ@admin.com
+      PGADMIN_DEFAULT_PASSWORD: adminFQ4321
+    ports:
+      - "5050:80"
+    depends_on:
+      - database
+    networks:
+      - finquest-compose-network
+networks:
+  finquest-compose-network:
+    driver: bridge
