@@ -30,9 +30,14 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
     private List<Spent> spents;
+
+    @OneToMany(mappedBy = "user",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    private List<IndividualGoal> individualGoals;
 
     @CreatedDate
     private LocalDateTime createdDate;
