@@ -3,9 +3,6 @@ package com.finquest.backend.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,8 +10,7 @@ import java.util.UUID;
 @Table(name = "app_user",
         schema = "public")
 @Getter @Setter
-@EntityListeners(AuditingEntityListener.class)
-public class User {
+public class User extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,18 +38,10 @@ public class User {
                 orphanRemoval = true)
     private List<IndividualGoal> individualGoals;
 
-    @CreatedDate
-    private LocalDateTime createdDate;
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Wallet wallet;
 
     public User() {}
-
-    public User(String name, String username, String password, String email,
-                List<Spent> spents, LocalDateTime createdDate) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.spents = spents;
-        this.createdDate = createdDate;
-    }
 }
