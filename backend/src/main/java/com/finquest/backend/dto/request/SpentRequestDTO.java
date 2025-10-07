@@ -1,6 +1,8 @@
 package com.finquest.backend.dto.request;
 
 import com.finquest.backend.model.enums.Category;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -9,6 +11,6 @@ public record SpentRequestDTO(
         String description,
         LocalDateTime date,
         Category category,
-        Double amountSpent,
+        BigDecimal amountSpent,
         UUID userId
 ) {}

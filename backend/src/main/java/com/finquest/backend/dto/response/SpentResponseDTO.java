@@ -1,6 +1,8 @@
 package com.finquest.backend.dto.response;
 
 import com.finquest.backend.model.enums.Category;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record SpentResponseDTO(
@@ -8,6 +10,6 @@ public record SpentResponseDTO(
         String description,
         LocalDateTime date,
         Category category,
-        Double amountSpent,
+        BigDecimal amountSpent,
         UserResponseDTO user
 ) {}
