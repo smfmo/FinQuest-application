@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/individualGoals")
@@ -33,5 +34,13 @@ public class IndividualGoalController {
     public ResponseEntity<List<IndividualGoalResponseDTO>> findAll() {
         List<IndividualGoal> result = service.findAll();
         return ResponseEntity.ok(mapper.toDto(result));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<IndividualGoalResponseDTO> partialUpdate(@PathVariable UUID id,
+                                                                   @RequestBody IndividualGoalRequestDTO request) {
+        var entitySaved = service.partialUpdate(id, request);
+
+        return ResponseEntity.ok(mapper.toDto(entitySaved));
     }
 }
