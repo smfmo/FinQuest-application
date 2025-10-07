@@ -1,11 +1,11 @@
 package com.finquest.backend.service;
 
 import com.finquest.backend.model.User;
+import com.finquest.backend.model.Wallet;
 import com.finquest.backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +29,9 @@ public class UserService {
 
     @Transactional
     public User save(User user) {
+        Wallet wallet = new Wallet();
+        user.setWallet(wallet);
+        wallet.setUser(user);
         return repository.save(user);
     }
 
