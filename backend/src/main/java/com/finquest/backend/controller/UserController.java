@@ -3,7 +3,7 @@ package com.finquest.backend.controller;
 import com.finquest.backend.dto.request.UserRequestDTO;
 import com.finquest.backend.dto.response.UserResponseDTO;
 import com.finquest.backend.mapper.UserMapper;
-import com.finquest.backend.model.User;
+import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> save(@RequestBody UserRequestDTO request) {
-        User user = mapper.toEntity(request);
+        UserEntity user = mapper.toEntity(request);
         var entitySaved = service.save(user);
 
         return ResponseEntity.ok(mapper.toDto(entitySaved));
@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> findAll() {
-        List<User> users = service.findAll();
+        List<UserEntity> users = service.findAll();
         return ResponseEntity.ok(mapper.toDto(users));
     }
 }

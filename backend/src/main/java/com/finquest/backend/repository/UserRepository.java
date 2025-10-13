@@ -1,9 +1,12 @@
 package com.finquest.backend.repository;
 
-import com.finquest.backend.model.User;
+import com.finquest.backend.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
 }

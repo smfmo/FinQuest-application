@@ -33,7 +33,7 @@ public class IndividualGoal extends Audit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     public IndividualGoal() {}
 }

@@ -21,7 +21,7 @@ public class Wallet extends Audit {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     public Wallet() {}
 }

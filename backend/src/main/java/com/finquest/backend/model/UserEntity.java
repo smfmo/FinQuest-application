@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "app_user",
         schema = "public")
 @Getter @Setter
-public class User extends Audit {
+public class UserEntity extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,5 +43,5 @@ public class User extends Audit {
             orphanRemoval = true)
     private Wallet wallet;
 
-    public User() {}
+    public UserEntity() {}
 }

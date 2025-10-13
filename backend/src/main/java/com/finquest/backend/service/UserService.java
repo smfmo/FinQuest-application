@@ -1,6 +1,6 @@
 package com.finquest.backend.service;
 
-import com.finquest.backend.model.User;
+import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.model.Wallet;
 import com.finquest.backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,26 +18,26 @@ public class UserService {
         this.repository = repository;
     }
 
-    public List<User> findAll() {
+    public List<UserEntity> findAll() {
         return repository.findAll();
     }
 
-    public User getById(UUID id) {
+    public UserEntity getById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
     }
 
     @Transactional
-    public User save(User user) {
+    public UserEntity save(UserEntity userEntity) {
         Wallet wallet = new Wallet();
-        user.setWallet(wallet);
-        wallet.setUser(user);
-        return repository.save(user);
+        userEntity.setWallet(wallet);
+        wallet.setUser(userEntity);
+        return repository.save(userEntity);
     }
 
     @Transactional
-    public User update(UUID id, User updatedUser) {
-        User existingUser = getById(id);
+    public UserEntity update(UUID id, UserEntity updatedUser) {
+        UserEntity existingUser = getById(id);
 
         existingUser.setName(updatedUser.getName());
         existingUser.setEmail(updatedUser.getEmail());
@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public void delete(UUID id) {
-        User existingUser = getById(id);
+        UserEntity existingUser = getById(id);
         repository.delete(existingUser);
     }
 }

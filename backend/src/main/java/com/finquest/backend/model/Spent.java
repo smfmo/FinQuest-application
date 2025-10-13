@@ -32,7 +32,7 @@ public class Spent extends Audit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     public Spent() {}
 }
