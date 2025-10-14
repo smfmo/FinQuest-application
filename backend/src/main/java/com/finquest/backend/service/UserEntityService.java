@@ -2,20 +2,24 @@ package com.finquest.backend.service;
 
 import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.model.Wallet;
-import com.finquest.backend.repository.UserRepository;
+import com.finquest.backend.repository.UserEntityRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserEntityService {
 
-    private final UserRepository repository;
+    private final UserEntityRepository repository;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository) {
+    public UserEntityService(UserEntityRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     public List<UserEntity> findAll() {
@@ -32,6 +36,7 @@ public class UserService {
         Wallet wallet = new Wallet();
         userEntity.setWallet(wallet);
         wallet.setUser(userEntity);
+        userEntity.setPassword(encoder.encode(userEntity.getPassword()));
         return repository.save(userEntity);
     }
 
@@ -49,5 +54,10 @@ public class UserService {
     public void delete(UUID id) {
         UserEntity existingUser = getById(id);
         repository.delete(existingUser);
+    }
+
+    public UserEntity getByUsername(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
     }
 }
