@@ -7,5 +7,4 @@ import java.util.UUID;
 
 @Repository
 public interface IndividualGoalRepository extends JpaRepository<IndividualGoal, UUID> {
-    IndividualGoal findByUserId(UUID userId);
 }
