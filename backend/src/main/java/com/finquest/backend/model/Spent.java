@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(name = "spent",
         schema = "public")
 @Getter @Setter
-public class Spent extends Audit {
+public class Spent extends Audit implements UserOwned {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

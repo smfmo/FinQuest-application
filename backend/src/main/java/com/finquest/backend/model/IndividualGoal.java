@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "individual_goal",
         schema = "public")
 @Getter @Setter
-public class IndividualGoal extends Audit {
+public class IndividualGoal extends Audit implements UserOwned {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
