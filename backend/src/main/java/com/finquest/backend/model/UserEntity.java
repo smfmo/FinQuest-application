@@ -1,5 +1,6 @@
 package com.finquest.backend.model;
 
+import com.finquest.backend.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class UserEntity extends Audit {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @OneToMany(mappedBy = "user",
                 cascade = CascadeType.ALL,
