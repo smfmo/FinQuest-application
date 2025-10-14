@@ -4,7 +4,7 @@ import com.finquest.backend.dto.request.UserRequestDTO;
 import com.finquest.backend.dto.response.UserResponseDTO;
 import com.finquest.backend.mapper.UserMapper;
 import com.finquest.backend.model.UserEntity;
-import com.finquest.backend.service.UserService;
+import com.finquest.backend.service.UserEntityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService service;
+    private final UserEntityService service;
     private final UserMapper mapper;
 
-    public UserController(UserService service, UserMapper mapper) {
+    public UserController(UserEntityService service, UserMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
