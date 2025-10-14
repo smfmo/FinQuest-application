@@ -7,7 +7,6 @@ import com.finquest.backend.model.Spent;
 import com.finquest.backend.service.SpentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -32,7 +31,7 @@ public class SpentController {
 
     @GetMapping
     public ResponseEntity<List<SpentResponseDTO>> findAll() {
-        List<Spent> spents = service.findAll();
+        List<Spent> spents = service.findAllByUserAuthenticated();
         return ResponseEntity.ok(mapper.toDto(spents));
     }
 }
