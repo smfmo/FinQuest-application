@@ -32,7 +32,7 @@ public class IndividualGoalController {
 
     @GetMapping
     public ResponseEntity<List<IndividualGoalResponseDTO>> findAll() {
-        List<IndividualGoal> result = service.findAll();
+        List<IndividualGoal> result = service.findAllByUserAuthenticated();
         return ResponseEntity.ok(mapper.toDto(result));
     }
 
