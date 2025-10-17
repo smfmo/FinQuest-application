@@ -1,5 +1,6 @@
 package com.finquest.backend.exception.handler;
 
+import com.finquest.backend.exception.custom.InvalidAmountSpentException;
 import com.finquest.backend.exception.custom.UserMismatchException;
 import com.finquest.backend.exception.custom.WalletOwnershipException;
 import com.finquest.backend.exception.response.ErrorResponseDTO;
@@ -40,5 +41,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponseDTO handleWalletOwnershipException(WalletOwnershipException e) {
         return new ErrorResponseDTO(HttpStatus.FORBIDDEN.value(), e.getMessage(), List.of());
+    }
+
+    @ExceptionHandler(InvalidAmountSpentException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponseDTO handleInvalidAmountSpentException(InvalidAmountSpentException e) {
+        return new ErrorResponseDTO(HttpStatus.CONFLICT.value(), e.getMessage(), List.of());
     }
 }
