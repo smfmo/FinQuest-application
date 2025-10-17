@@ -5,6 +5,7 @@ import com.finquest.backend.dto.response.IndividualGoalResponseDTO;
 import com.finquest.backend.mapper.IndividualGoalMapper;
 import com.finquest.backend.model.IndividualGoal;
 import com.finquest.backend.service.IndividualGoalService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class IndividualGoalController {
     }
 
     @PostMapping
-    public ResponseEntity<IndividualGoalResponseDTO> save(@RequestBody IndividualGoalRequestDTO request) {
+    public ResponseEntity<IndividualGoalResponseDTO> save(@RequestBody @Valid IndividualGoalRequestDTO request) {
         IndividualGoal goal = mapper.toEntity(request);
         var entitySaved = service.save(goal);
         return ResponseEntity.ok(mapper.toDto(entitySaved));
