@@ -1,7 +1,6 @@
 package com.finquest.backend.service;
 
 import com.finquest.backend.dto.request.IndividualGoalRequestDTO;
-import com.finquest.backend.exception.custom.UserMismatchException;
 import com.finquest.backend.model.IndividualGoal;
 import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.repository.IndividualGoalRepository;
