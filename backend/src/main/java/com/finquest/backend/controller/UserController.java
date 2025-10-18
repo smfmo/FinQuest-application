@@ -5,6 +5,7 @@ import com.finquest.backend.dto.response.UserResponseDTO;
 import com.finquest.backend.mapper.UserMapper;
 import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.service.UserEntityService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> save(@RequestBody UserRequestDTO request) {
+    public ResponseEntity<UserResponseDTO> save(@RequestBody @Valid UserRequestDTO request) {
         UserEntity user = mapper.toEntity(request);
         var entitySaved = service.save(user);
 
