@@ -1,5 +1,6 @@
 package com.finquest.backend.exception.handler;
 
+import com.finquest.backend.exception.custom.ExistingUsernameException;
 import com.finquest.backend.exception.custom.InvalidAmountSpentException;
 import com.finquest.backend.exception.custom.UserMismatchException;
 import com.finquest.backend.exception.custom.WalletOwnershipException;
@@ -46,6 +47,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidAmountSpentException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponseDTO handleInvalidAmountSpentException(InvalidAmountSpentException e) {
+        return new ErrorResponseDTO(HttpStatus.CONFLICT.value(), e.getMessage(), List.of());
+    }
+
+    @ExceptionHandler(ExistingUsernameException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponseDTO handleExistingUsernameException(ExistingUsernameException e) {
         return new ErrorResponseDTO(HttpStatus.CONFLICT.value(), e.getMessage(), List.of());
     }
 }
