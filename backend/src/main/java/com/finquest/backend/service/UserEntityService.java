@@ -3,6 +3,7 @@ package com.finquest.backend.service;
 import com.finquest.backend.model.UserEntity;
 import com.finquest.backend.model.Wallet;
 import com.finquest.backend.repository.UserEntityRepository;
+import com.finquest.backend.validator.UserEntityValidator;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +17,13 @@ public class UserEntityService {
 
     private final UserEntityRepository repository;
     private final PasswordEncoder encoder;
+    private final UserEntityValidator validator;
 
-    public UserEntityService(UserEntityRepository repository, PasswordEncoder encoder) {
+    public UserEntityService(UserEntityRepository repository,
+                             PasswordEncoder encoder, UserEntityValidator validator) {
         this.repository = repository;
         this.encoder = encoder;
+        this.validator = validator;
     }
 
     public List<UserEntity> findAll() {
@@ -37,6 +41,7 @@ public class UserEntityService {
         userEntity.setWallet(wallet);
         wallet.setUser(userEntity);
         userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+        validator.validateUsername(userEntity);
         return repository.save(userEntity);
     }
 
